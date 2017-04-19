@@ -51,7 +51,7 @@
 
         href="http://riaevangelist.github.io/node-ipc/"
 
-    >node-ipc (v8.10.3)</a>
+    >node-ipc (v9.0.1)</a>
 </h1>
 <h4>A nodejs module for local and remote Inter Process Communication (IPC), Neural Networking, and able to facilitate machine learning.</h4>
 <div class="apidocSectionDiv"><a
@@ -138,41 +138,7 @@
 
         <li>
 
-            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">node-ipc.</span>eventParser</span>
-
-        </li>
-
-        <li>
-
             <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">node-ipc.</span>of</span>
-
-        </li>
-
-    </ol></li>
-
-    <li class="apidocModuleLi"><a href="#apidoc.module.node-ipc.eventParser">module node-ipc.eventParser</a><ol>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.node-ipc.eventParser.format">
-            function <span class="apidocSignatureSpan">node-ipc.eventParser.</span>format
-            <span class="apidocSignatureSpan">(message)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.node-ipc.eventParser.parse">
-            function <span class="apidocSignatureSpan">node-ipc.eventParser.</span>parse
-            <span class="apidocSignatureSpan">(data)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">node-ipc.eventParser.</span>delimiter</span>
 
         </li>
 
@@ -697,86 +663,6 @@ default udp server
     </ul>
 
 
-
-
-
-
-
-
-</div>
-
-<div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.node-ipc.eventParser" id="apidoc.module.node-ipc.eventParser">module node-ipc.eventParser</a></h1>
-
-
-    <h2>
-        <a href="#apidoc.element.node-ipc.eventParser.format" id="apidoc.element.node-ipc.eventParser.format">
-        function <span class="apidocSignatureSpan">node-ipc.eventParser.</span>format
-        <span class="apidocSignatureSpan">(message)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function formatData(message){
-    if(!message.data &#x26;&#x26; message.data!==false &#x26;&#x26; message.data!==0){
-        message.data={};
-    }
-    if(message.data[&#x27;_maxListeners&#x27;]){
-        message.data={};
-    }
-
-    message=message.JSON+parser.delimiter;
-    return message;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
-let message=new Message;
-message.type=type;
-message.data=data;
-
-if(this.config.rawBuffer){
-    message=new Buffer(type,this.config.encoding);
-}else{
-    message=eventParser.<span class="apidocCodeKeywordSpan">format</span>(message);
-}
-
-if(!this.config.sync){
-    this.socket.write(message);
-    return;
-}
-...</pre></li>
-    </ul>
-
-
-
-    <h2>
-        <a href="#apidoc.element.node-ipc.eventParser.parse" id="apidoc.element.node-ipc.eventParser.parse">
-        function <span class="apidocSignatureSpan">node-ipc.eventParser.</span>parse
-        <span class="apidocSignatureSpan">(data)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function parseDataEvents(data){
-    let events=data.split(parser.delimiter);
-    events.pop();
-    return events;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
-            if(data.slice(-1)!=eventParser.delimiter || data.indexOf(eventParser.delimiter) == -1){
-client.log(&#x27;Messages are large, You may want to consider smaller messages.&#x27;);
-return;
-            }
-
-            this.ipcBuffer=&#x27;&#x27;;
-
-            const events = eventParser.<span class="apidocCodeKeywordSpan">parse</span>(data);
-            const eCount = events.length;
-            for(let i=0; i&#x3c;eCount; i++){
-let message=new Message;
-message.load(events[i]);
-
-client.log(&#x27;detected event&#x27;, message.type, message.data);
-client.publish(
-...</pre></li>
-    </ul>
 
 
 
